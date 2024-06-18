@@ -66,5 +66,5 @@ yarn build
 
 ## Copyright
 
-&copy; 2021 General Conference of the Seventh-day Adventist Church [https://adventist.org](https://adventist.org) | [https://adventist.io](https://adventist.io)
+&copy; 2024 General Conference of the Seventh-day Adventist Church [https://adventist.org](https://adventist.org) | [https://adventist.io](https://adventist.io)
 

@@ -1,0 +1,9 @@
+.example-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.example {
+    flex: 1;
+}
