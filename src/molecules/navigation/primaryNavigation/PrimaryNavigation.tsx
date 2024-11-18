@@ -1,6 +1,6 @@
 import React from 'react'
 import renderItems from "../../../helpers/renderItems";
-import {PrimaryNavItem} from "../primaryNavItem/PrimaryNavItem";
+import {PrimaryNavItem, PrimaryNavItemProps} from "../primaryNavItem/PrimaryNavItem";
 
 interface PrimaryNavBaseProps {
     children?: React.ReactNode,
@@ -12,7 +12,7 @@ interface PrimaryNavBaseProps {
      * Specify whether the PrimaryNavBase should be a hasDropdown variant
      */
     hasDropdown?: boolean,
-    items?: [],
+    items?: PrimaryNavItemProps[],
     /**
      * Specify the url of your  PrimaryNavBase
      */
@@ -48,7 +48,7 @@ export const PrimaryNavBase = ({
 }
 
 export interface PrimaryNavigationProps {
-    items?: []
+    items?: PrimaryNavItemProps[]
 }
 
 export const PrimaryNavigation = ({items = []}: PrimaryNavigationProps): JSX.Element => {

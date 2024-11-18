@@ -25,7 +25,7 @@ export const Sabbath = ({backgroundImage, showLogo = true, logo = "logo"}: Sabba
         <aside
             className={`l-wrap__sabbath l-sabbath ${
                 backgroundImage ? 'u-background-image--sabbath' : ''
-            }`}
+            } js-sticky-parent js-toggle-menu`}
         >
             {backgroundImage ? (
                 <>
@@ -33,26 +33,26 @@ export const Sabbath = ({backgroundImage, showLogo = true, logo = "logo"}: Sabba
                         styles={`.u-background-image--sabbath { background-image: url('${backgroundImage}') !important; }`}
                     />
                     {showLogo && (
-                        <div className="l-sabbath__logo u-path-fill--white">
+                        <div className="l-sabbath__logo u-path-fill--white js-sticky">
                             <Icon name={logo}/>
                         </div>
                     )}
                 </>
             ) : (
                 <>
-                    <div className="l-sabbath__logo">
+                    <div className="l-sabbath__logo js-sticky">
                         {showLogo && (
                             <div className={`l-sabbath__logo--inner `}>
-                                <div className="l-sabbath__logo-light u-theme--path-fill--base">
+                                <div className="l-sabbath__logo-light u-path-fill--white">
                                     <Icon name={logo}/>
                                 </div>
-                                <div className="l-sabbath__logo-dark u-path-fill--white">
+                                <div className="l-sabbath__logo-dark u-theme--path-fill--base">
                                     <Icon name={logo}/>
                                 </div>
                             </div>
                         )}
                     </div>
-                    <div className="l-sabbath__overlay u-theme--background-color--base" style={{opacity: -1.61227}}/>
+                    <div className="l-sabbath__overlay u-theme--background-color--base"/>
                 </>
             )}
         </aside>

@@ -29,7 +29,7 @@ export default {
         },
         logoElement: {
             defaultValue: "SDA",
-            options: ["SDA", "SDAWithIcon", "GAIN"],
+            options: ["SDA", "SDAWithIcon", "GAIN", "SDAbgNet"],
             control: {type: "select"}
         },
         usePathFill: {

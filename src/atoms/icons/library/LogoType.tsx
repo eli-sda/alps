@@ -4,5 +4,6 @@ export interface LogoType {
     canBeDark?: boolean,
     link?: string,
     element?: React.ReactNode,
-    useFillTheme?: boolean
+    useFillTheme?: boolean,
+    useNavLink?: boolean
 }

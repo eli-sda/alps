@@ -1,9 +1,9 @@
 import React from 'react'
 import renderItems from "../../../helpers/renderItems";
-import {SubNavItem} from "./SubNavItem";
+import {SubNavItem, SubNavItemProps} from "./SubNavItem";
 
 export interface SubNavProps {
-    items?: [],
+    items?: SubNavItemProps[],
     level?: "secondary" | "tertiary",
     type?: "primary" | "secondary",
     className?: string

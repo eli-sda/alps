@@ -1,6 +1,8 @@
 import React, {useCallback, useMemo, useState} from 'react'
+import { NavLink } from 'react-router-dom';
 import {SubNavArrow} from "./SubNavArrow";
 import {SubNav} from "./SubNav";
+import { SubNavItemProps } from './SubNavItem';
 
 const statuses = {
     closed: {menu: false, search: false},
@@ -8,7 +10,7 @@ const statuses = {
     openSearch: {menu: true, search: true},
 }
 
-function useItemId(text: string, url: string) {
+export function useItemId(text: string, url: string) {
     return useMemo(
         () => (text ? `${text.toLowerCase().replace(' ', '-')}-${url}` : url),
         [text, url]
@@ -29,7 +31,7 @@ export interface PrimaryNavItemProps {
      * Specify whether the PrimaryNavItem should be a priority variant
      */
     priority?: boolean,
-    subnav?: [],
+    subnav?: SubNavItemProps[],
     /**
      * Specify the text of your  PrimaryNavItem
      */
@@ -42,6 +44,8 @@ export interface PrimaryNavItemProps {
      * Specify whether the PrimaryNavItem should be a noWrap variant
      */
     noWrap?: boolean,
+    isExternal?: boolean, //Eli added
+    useNavLink?: boolean
 }
 
 export const PrimaryNavItem = ({
@@ -53,6 +57,8 @@ export const PrimaryNavItem = ({
                                    url = "",
                                    onClick,
                                    noWrap,
+                                   isExternal = url.indexOf('http')==0,
+                                   useNavLink
                                }: PrimaryNavItemProps): JSX.Element => {
 
     const [isOpen, setIsOpen] = useState(statuses.closed);
@@ -77,25 +83,37 @@ export const PrimaryNavItem = ({
         [id, openSubNav, setOpenSubNav]
     )
 
+    const linkAttr = {
+        target: isExternal ? '_blank' : undefined,
+        to: url || '',
+        href: url || '',
+        className: `c-primary-nav__link 
+    ${openClass} 
+    ${linkClass} 
+    ${priority ? 'is-priority' : ''}
+    ${noWrap ? 'u-flex--nowrap' : ''} 
+    u-font--primary-nav u-theme--link-hover--base u-theme--border-color--base u-color--gray--dark`
+      };
+
     return (
         <li
             className={`c-primary-nav__list-item ${
                 subnav ? 'has-subnav' : ''
             } ${openClass}`}
         >
-            <a
-                className={`c-primary-nav__link 
-                    ${openClass} 
-                    ${linkClass} 
-                    ${priority ? 'is-priority' : ''}
-                    ${noWrap ? "u-flex--nowrap" : ""} 
-                    u-font--primary-nav u-theme--link-hover--base u-theme--border-color--base u-color--gray--dark`
-                }
-                href={url}
-                onClick={onClick}
-            >
+            {isExternal ? (
+                <a {...linkAttr} onClick={onClick}>
+                {text} <i className="fa fa-external-link u-space--quarter--left"></i>
+                </a>
+            ) : useNavLink ? (
+                <NavLink {...linkAttr}>{text}</NavLink>
+                ) : (
+                <a {...linkAttr} onClick={onClick}>
                 {text}
-            </a>
+                </a>
+                )
+            }
+
             {subnav && <SubNavArrow onClick={onArrowClick} fill="gray"/>}
             {subnav && <SubNav items={subnav} className={openClass} type="primary"/>}
         </li>

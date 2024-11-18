@@ -1,9 +1,9 @@
 import React from "react";
 import renderItems from "../../../helpers/renderItems";
-import {SecondaryNavItem} from "./SecondaryNavItem";
+import {SecondaryNavItem, SecondaryNavItemProps} from "./SecondaryNavItem";
 
 export interface SecondaryNavigationProps {
-    items?: [],
+    items?: SecondaryNavItemProps[],
     /**
      * Specify the menuLabel of your SecondaryNavigation
      */
@@ -31,7 +31,7 @@ export const SecondaryNavigation = ({
                                         showMenu = true,
                                         showSearch = true,
                                         onClickMenu,
-                                        onClickSearch
+                                        onClickSearch                                        
                                     }: SecondaryNavigationProps): JSX.Element => {
 
     return (

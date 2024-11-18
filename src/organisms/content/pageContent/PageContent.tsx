@@ -1,9 +1,9 @@
 import React from "react";
 import {Text} from "../../../atoms/text/Text";
-import {Breadcrumbs} from "../../../molecules/navigation/breadcrumbs/Breadcrumbs";
+import {BreadcrumbItemProps, Breadcrumbs} from "../../../molecules/navigation/breadcrumbs/Breadcrumbs";
 
 export interface PageContentProps {
-  breadcrumbs?: [],
+  breadcrumbs?: BreadcrumbItemProps[],
   children?: React.ReactNode,
   content?: React.ReactNode
 }

@@ -4,6 +4,7 @@ import {Meta, StoryObj} from "@storybook/react";
 import data from "./PrimaryNavigation.stories.json";
 import {PrimaryNavigation, PrimaryNavigationProps} from "./PrimaryNavigation";
 import {JSX} from 'react/jsx-runtime';
+import { Outlet } from 'react-router';
 
 interface HeaderSimulatorProps {
     children?: React.ReactNode
@@ -27,9 +28,12 @@ const meta = {
     },
     decorators: [
         (Story) => (
+            <>
             <HeaderSimulator>
                 <Story />
             </HeaderSimulator>
+            <Outlet />
+            </>
         )
     ],
     component: PrimaryNavigation,

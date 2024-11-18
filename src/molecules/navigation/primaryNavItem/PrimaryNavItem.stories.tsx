@@ -4,6 +4,7 @@ import {PrimaryNavItem, PrimaryNavItemProps} from "./PrimaryNavItem";
 
 import data from "./PrimaryNavItem.stories.json";
 import {PrimaryNavBase} from "../primaryNavigation/PrimaryNavigation";
+import { Outlet } from 'react-router';
 
 interface HeaderSimulatorProps {
     children?: React.ReactNode
@@ -39,10 +40,12 @@ export default {
 } as Meta;
 
 const Template: Story<PrimaryNavItemProps> = (args) =>
+    <>
     <HeaderSimulator>
         <PrimaryNavItem {...args} />
     </HeaderSimulator>
-
+    <Outlet />
+    </>
 export const Basic = Template.bind({});
 
 export const with_subMenu = Template.bind({});
