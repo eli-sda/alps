@@ -42,7 +42,11 @@ export const AccordionItem = ({
                     name={"arrow-bracket-right"}
                     color={"darker"}
                 />
-                <strong>{heading}</strong>
+                {typeof heading === 'string' ? (
+                  <strong>{heading}</strong>
+                ) : (
+                  heading
+                )}
                 {icon && (
                     <IconWrap
                         className={"u-space--half--left"}
