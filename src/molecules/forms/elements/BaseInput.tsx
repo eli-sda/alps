@@ -22,6 +22,7 @@ export interface BaseInputProps {
   required?: boolean;
   accept?: string;
   rows?: number;
+  readOnly?: boolean;
   onClick?: (
     e: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -44,6 +45,7 @@ export const BaseInput = ({
   required = false,
   accept,
   rows,
+  readOnly,
   onChange,
   onClick,
   onBlur
@@ -82,7 +84,8 @@ export const BaseInput = ({
     autoComplete: 'on',
     onBlur: onBlur,
     style: isFile ? fileStyles : undefined,
-    value: value
+    value: value,
+    readOnly: readOnly
   };
   // Only assign onClick if it's a valid input event handler
   if (!isTextArea && typeof onClick === 'function') {
@@ -109,6 +112,7 @@ export const BaseInput = ({
           disabled
           value={fileName}
           placeholder="image.jpg"
+          readOnly={readOnly}
         />
       )}
     </>

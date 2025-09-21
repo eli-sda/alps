@@ -27,6 +27,7 @@ export interface TextFieldProps {
   rows?: number;
   required?: boolean;
   accept?: string;
+  readOnly?: boolean;
   onChange?: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
