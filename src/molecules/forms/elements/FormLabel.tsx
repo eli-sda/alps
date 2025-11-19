@@ -39,7 +39,7 @@ export const FormLabel = ({
       <label htmlFor={htmlFor} className={`u-font--secondary--s ${labelClass}`}>
         {text}
         {faIcon && (
-          <i className={`fa fa-${faIcon} u-space--quarter--left`}></i>
+          <i className={`${faIcon} u-space--quarter--left`}></i>
         )}{' '}
         {required && <span className={'u-color--error'}>*</span>}
         {textOptional && (

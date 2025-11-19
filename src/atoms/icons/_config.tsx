@@ -42,7 +42,6 @@ export const iconConfig = {
         'search': 'search',
         'settings': 'settings',
         'share': 'share',
-        'subscribe': 'subscribe',
-        'tiktok': 'tiktok'
+        'subscribe': 'subscribe'
     }
 };
