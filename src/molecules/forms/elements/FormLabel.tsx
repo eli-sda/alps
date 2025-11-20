@@ -13,7 +13,7 @@ export interface FormLabelProps {
   textOptional?: string;
   position?: 'top' | 'bottom';
   darkMode?: boolean;
-  faIcon?: string;
+  faIconClass?: string;
 }
 
 export const FormLabel = ({
@@ -27,7 +27,7 @@ export const FormLabel = ({
   className = 'c-form-group',
   labelClass = '',
   darkMode = false,
-  faIcon = ''
+  faIconClass = ''
 }: FormLabelProps): JSX.Element => {
   const fieldInTop = darkMode || position === 'bottom';
 
@@ -38,8 +38,8 @@ export const FormLabel = ({
       {fieldInTop && field}
       <label htmlFor={htmlFor} className={`u-font--secondary--s ${labelClass}`}>
         {text}
-        {faIcon && (
-          <i className={`${faIcon} u-space--quarter--left`}></i>
+        {faIconClass && (
+          <i className={`${faIconClass} u-space--quarter--left`}></i>
         )}{' '}
         {required && <span className={'u-color--error'}>*</span>}
         {textOptional && (

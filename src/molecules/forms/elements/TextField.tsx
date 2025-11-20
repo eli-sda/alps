@@ -10,7 +10,7 @@ export interface TextFieldProps {
   labelOptional?: string;
   labelClass?: string;
   labelTagClass?: string;
-  faIcon?: string;
+  faIconClass?: string;
   labelSpacing?: string;
   name: string;
   placeholder?: string;
@@ -45,7 +45,7 @@ export const TextField = ({
   labelOptional,
   labelClass,
   labelTagClass,
-  faIcon,
+  faIconClass,
   labelSpacing,
   touched = false,
   ...props
@@ -64,7 +64,7 @@ export const TextField = ({
       htmlFor={props.name}
       text={label}
       textOptional={labelOptional}
-      faIcon={faIcon}
+      faIconClass={faIconClass}
       required={props.required}
       // spacing={labelSpacing}
     >
