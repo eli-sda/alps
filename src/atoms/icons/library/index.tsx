@@ -20,7 +20,6 @@ import Search from './Search'
 import Settings from './Settings'
 import Share from './Share'
 import Subscribe from './Subscribe'
-import TikTok from './TikTok'
 
 // Returns a mapping of icons names and they correspondent components
 
@@ -46,7 +45,6 @@ export default new Map([
     ['search', Search],
     ['settings', Settings],
     ['share', Share],
-    ['subscribe', Subscribe],
-    ['tiktok', TikTok],
+    ['subscribe', Subscribe]
 ]);
 
