@@ -50,6 +50,7 @@ export const BaseSearch = ({
                     <div className={isSearchHeader ? "l-grid-item l-grid-item--m--3-col" : ""}>
                         <div style={{position: "relative"}}>
                             <input
+                                name="search"
                                 className="o-input__search u-color--gray u-font--secondary--s u-theme--color--darker"
                                 onChange={onSearch}
                                 placeholder={placeholder}

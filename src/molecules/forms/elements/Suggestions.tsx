@@ -14,8 +14,8 @@ export interface SuggestionsProps {
 export const Suggestions = ({items = []}: SuggestionsProps): JSX.Element => {
     return (
         <ul className="o-suggestions u-border--bottom u-theme--color--base">
-            {items.map(({text, href, onClick, key}) => (
-                <li key={key}
+            {items.map(({text, href, onClick, key}, i) => (
+                <li key={key || `suggestion-item-${i}`}
                     className="o-suggestions__item u-font--secondary u-padding--half--bottom u-padding--half--top">
                     <a className="o-suggestions__link" onClick={onClick} href={href}>
                         {text}
