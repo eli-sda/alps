@@ -10,7 +10,7 @@ import {FilterGroup} from "./FilterGroup";
 
 export interface BaseSearchProps {
     filters?: [],
-    onSearch?: () => void,
+    onSearch?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onSubmit?: () => void,
     placeholder?: string,
     searchAgainLabel?: string,
