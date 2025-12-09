@@ -73,7 +73,7 @@ export const Footer = ({
                     </p>
                 </div>
                 {primaryNav && (
-                    <div className="c-footer__primary-nav l-grid-item l-grid-item--m--3-col l-grid-item--l--1-col">
+                    <div className={`c-footer__primary-nav l-grid-item l-grid-item--m--3-col ${secondaryNav ? "l-grid-item--l--1-col" : "l-grid-item--l--3-col"}`}>
                         <FooterPrimaryNavigation {...primaryNav} />
                     </div>
                 )}

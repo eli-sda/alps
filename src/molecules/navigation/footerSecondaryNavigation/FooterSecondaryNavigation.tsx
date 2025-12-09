@@ -20,9 +20,10 @@ export const FooterSecondaryNavigation = ({
                 {items.map(({icon, text, url, className, onClick}, key) => (
                     <a
                         href={url}
-                        className={`c-footer__secondary-nav__link u-link--white u-theme--link-hover--light ${className}`}
+                        className={`c-footer__secondary-nav__link u-link--white u-theme--link-hover--light${className ? ` ${className}` : ''}`}
                         key={`footer-nav-link-${key}`}
                         onClick={onClick}
+                        {...(url.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
                     >
                         <IconWrap
                             color="white"
