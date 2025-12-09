@@ -4,7 +4,6 @@ export interface VideoProps {
   src: string;
   width?: number;
   height?: number;
-  title?: string;
 }
 
 export const Video = ({
