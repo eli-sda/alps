@@ -35,6 +35,14 @@ export interface FigureProps {
    * Specify the videoSrc of your  Figure
    */
   videoSrc?: string;
+  /**
+   * Callback when video ends
+   */
+  onVideoEnded?: () => void;
+  /**
+   * Control video visibility (pause when hidden)
+   */
+  isVisible?: boolean;
 }
 
 export const Figure = ({
@@ -44,7 +52,9 @@ export const Figure = ({
   lazy = false,
   videoSrc,
   align,
-  size
+  size,
+  onVideoEnded,
+  isVisible = true
 }: FigureProps): JSX.Element => {
   const classes = useMemo(
     () => (align && size ? getFigureClasses(align, size) : ''),
@@ -60,7 +70,7 @@ export const Figure = ({
       )}
       {videoSrc && (
         <div className="u-image--wrap">
-          <Video src={videoSrc} />
+          <Video src={videoSrc} onEnded={onVideoEnded} isVisible={isVisible} />
         </div>
       )}
       {caption && (
