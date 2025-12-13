@@ -54,7 +54,7 @@ export const Figure = ({
   align,
   size,
   onVideoEnded,
-  isVisible = true
+  isVisible
 }: FigureProps): JSX.Element => {
   const classes = useMemo(
     () => (align && size ? getFigureClasses(align, size) : ''),
