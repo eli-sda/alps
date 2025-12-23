@@ -7,6 +7,7 @@ export interface CheckboxProps {
   checked?: boolean;
   error?: string;
   id?: string;
+  className?: string;
   label: string;
   labelOptional?: string;
   labelClass?: string;
@@ -21,6 +22,7 @@ export interface CheckboxProps {
 
 export const Checkbox = ({
   checked,
+  className,
   label,
   labelOptional,
   labelClass,
@@ -29,7 +31,8 @@ export const Checkbox = ({
 }: CheckboxProps): JSX.Element => {
   return (
     <FormLabel
-      className={labelClass}
+      className={className}
+      labelClass={labelClass}
       error={props.error}
       htmlFor={props.id || props.name}
       position="bottom"
