@@ -14,10 +14,11 @@ export interface ContentBlockExpandProps {
     /**
      * Specify the description of your ContentBlockExpand
      */
-    description?: string
+    description?: string,
+    children?: React.ReactNode
 }
 
-export const ContentBlockExpand = ({title, kicker, description}: ContentBlockExpandProps): JSX.Element => {
+export const ContentBlockExpand = ({title, kicker, description, children}: ContentBlockExpandProps): JSX.Element => {
     const {onToggle, openClass} = useToggle();
 
     return (
@@ -45,7 +46,8 @@ export const ContentBlockExpand = ({title, kicker, description}: ContentBlockExp
                 </div>
             </div>
             <div className="c-block__body u-padding u-padding--zero--top u-spacing">
-                <p>{description}</p>
+                {description ? (<p> {description }</p>): null}
+                {children}
             </div>
         </div>
     )
