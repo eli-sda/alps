@@ -46,7 +46,7 @@ export const ContentBlockExpand = ({title, kicker, description, children}: Conte
                 </div>
             </div>
             <div className="c-block__body u-padding u-padding--zero--top u-spacing">
-                {description && (<p> {description }</p>)}
+                {description && <p>{description }</p>}
                 {children}
             </div>
         </div>
