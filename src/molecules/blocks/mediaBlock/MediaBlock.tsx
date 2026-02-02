@@ -29,7 +29,8 @@ export const MediaBlockTypesMap = {
     "row": "row",
     "stacked": "stacked",
     "relatedPost": "relatedPost",
-    "video": "video"
+    "video": "video",
+    "quarterSS": "quarterSS"
 }
 
 export interface MediaBlockProps {
