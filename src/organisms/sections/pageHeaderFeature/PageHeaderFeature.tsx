@@ -9,7 +9,8 @@ export const blockTypes = {
     "featureWide": "featureWide",
     "column": "column",
     "full": "full",
-    "longform": "longform"
+    "longform": "longform",
+    "quarterSS": "quarterSS"
 }
 
 export interface PageHeaderFeatureProps {

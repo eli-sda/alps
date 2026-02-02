@@ -60,8 +60,7 @@ const archivePage = {
     'l-grid l-grid--7-col l-standard-break l-grid-wrap l-grid-wrap--5-of-7',
   image:
     'u-padding--zero--sides l-grid-item--2-col l-grid-item--m--1-col l-grid-item--l--1-col',
-  content:
-    'u-spacing u-flex--justify-start',
+  content: 'u-spacing u-flex--justify-start',
   title: 'u-font--primary--m u-space--zero u-theme--color--darker',
   meta: 'u-theme--color--base'
 };
@@ -127,6 +126,20 @@ const longform = {
   titleLink: 'u-theme--link-hover--light'
 };
 
+// for SS lesson quarter like longform (style) and featuredNews (layout)
+const quarterSS = {
+  stackedUntilSmall: true,
+  seven: true,
+  block:
+    'can-be--dark-dark u-padding--bottom u-padding--top u-spacing--until-small l-grid--7-col l-grid-wrap l-grid-wrap--6-of-7 u-theme--background-color--darker',
+  content:
+    'u-spacing u-border--left u-space--left u-padding--left u-flex--justify-start l-grid-item l-grid-item--s--4-col l-grid-item--l--4-col  u-theme--border-color--light--left u-theme--color--lighter',
+  title: 'u-color--white u-font--primary u-space--zero u-theme--color--lighter',
+  titleLink: 'u-theme--link-hover--light',
+  image:
+    'u-padding--zero--sides u-padding--left l-grid-item l-grid-item--s--2-col l-grid-item--l--1-col'
+};
+
 const row = {
   content: 'u-spacing u-color--gray',
   title: 'u-font--primary u-space--zero u-theme--color--darker',
@@ -175,6 +188,7 @@ const presets = {
   mediaContent,
   mediaRow,
   longform,
+  quarterSS,
   row,
   stacked,
   relatedPost,
