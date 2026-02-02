@@ -11,6 +11,10 @@ import {ImageType} from '../../../atoms/images/ImageType';
 
 export interface FigureProps {
   /**
+   * Click handler for the figure (e.g. for thumbnails)
+   */
+  onImageClick?: React.MouseEventHandler<HTMLDivElement>;
+  /**
    * Specify the caption of your  Figure
    */
   caption?: string;
@@ -54,7 +58,8 @@ export const Figure = ({
   align,
   size,
   onVideoEnded,
-  isVisible
+  isVisible,
+  onImageClick
 }: FigureProps): JSX.Element => {
   const classes = useMemo(
     () => (align && size ? getFigureClasses(align, size) : ''),
@@ -64,7 +69,11 @@ export const Figure = ({
   return (
     <figure className={`o-figure ${classes} ${className}`}>
       {image && (
-        <div className="o-figure__image">
+        <div
+          className="o-figure__image"
+          onClick={onImageClick}
+          style={onImageClick ? {cursor: 'pointer'} : undefined}
+        >
           <Picture image={image} lazy={lazy} />
         </div>
       )}
