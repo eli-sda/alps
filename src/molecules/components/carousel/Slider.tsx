@@ -12,15 +12,12 @@ export const DefaultArrows = (onNext?: () => void, onPrev?: () => void): JSX.Ele
     )
 }
 
-export const DefaultDots = (dots: { active?: boolean, key?: number, label?: string, onClick?: () => void }[]): JSX.Element => {
+export const DefaultDots = ({ dots }: { dots: { active?: boolean, key?: number, label?: string, onClick?: () => void }[] }): JSX.Element => {
     return (
         <ul className="slick-dots" role="tablist">
             {dots.map(({active, key, label, onClick}) => (
                 <li
                     aria-hidden={!active}
-                    role="presentation"
-                    aria-selected={!active}
-                    aria-controls={`navigation${label}`}
                     className={active ? "slick-active" : ""}
                     key={`slider-dot-${key}`}
                     onClick={onClick}
@@ -28,8 +25,6 @@ export const DefaultDots = (dots: { active?: boolean, key?: number, label?: stri
                     <button
                         type="button"
                         data-role="none"
-                        role="button"
-                        aria-required="false"
                     >
                         {label}
                     </button>
@@ -96,7 +91,7 @@ export const Slider = ({
                 </div>
             </div>
             {showArrows && Arrows && <Arrows onNext={onNext} onPrev={onPrev}/>}
-            {showDots && <Dots dots={dots} onClick={onDotClick}/>}
+            {showDots && Dots && <Dots dots={dots} />}
         </div>
     )
 }
