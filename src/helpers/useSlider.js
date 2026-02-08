@@ -163,6 +163,9 @@ export default function useSlider(children = [], settings = {}) {
     const trackElem = trackRef.current
     const listElem = listRef.current
 
+    // Prevent errors if refs are not yet attached
+    if (!sliderElem || !trackElem || !listElem) return;
+
     // Calculate slider and list elements widths
     const listWidth = listElem.offsetWidth
     const sliderWidth = sliderElem.offsetWidth
