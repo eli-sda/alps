@@ -20,7 +20,8 @@ export interface BaseSearchProps {
     suggestions?: SuggestionsItem[],
     term?: string,
     className?: string,
-    isSearchHeader?: boolean
+    isSearchHeader?: boolean,
+    hideSearchButton?: boolean
 }
 
 export const BaseSearch = ({
@@ -34,7 +35,8 @@ export const BaseSearch = ({
                                sorting,
                                suggestions,
                                term,
-                               isSearchHeader = false
+                               isSearchHeader = false,
+                               hideSearchButton = false
                            }: BaseSearchProps): JSX.Element => {
     const {onToggle, openClass} = useToggle(false, "c-filter-is-active", "");
 
@@ -63,12 +65,13 @@ export const BaseSearch = ({
                     </div>
                     <div>
                         <div className={"u-flex"}>
-                            <Button
-                                className={"c-filter__button u-space--right"}
-                                icon="search"
-                                label={searchLabel}
-                                outline={!showSearchAgain}
-                            />
+                            {!hideSearchButton && (
+                                <Button
+                                    className={"c-filter__button u-space--right"}
+                                    icon="search"
+                                    label={searchLabel}
+                                    outline={!showSearchAgain}
+                                />)}
                             {(filters || sorting) && (
                                 <Button
                                     as="span"
