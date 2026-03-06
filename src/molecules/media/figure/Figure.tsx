@@ -47,6 +47,10 @@ export interface FigureProps {
    * Control video visibility (pause when hidden)
    */
   isVisible?: boolean;
+  /**
+   * Id for the figure
+   */
+  id?: string;
 }
 
 export const Figure = ({
@@ -59,7 +63,8 @@ export const Figure = ({
   size,
   onVideoEnded,
   isVisible,
-  onImageClick
+  onImageClick,
+  id
 }: FigureProps): JSX.Element => {
   const classes = useMemo(
     () => (align && size ? getFigureClasses(align, size) : ''),
@@ -67,7 +72,7 @@ export const Figure = ({
   );
 
   return (
-    <figure className={`o-figure ${classes} ${className}`}>
+    <figure id={id} className={`o-figure ${classes} ${className}`}>
       {image && (
         <div
           className="o-figure__image"
