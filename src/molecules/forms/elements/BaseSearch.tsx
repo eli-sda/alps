@@ -36,7 +36,8 @@ export const BaseSearch = ({
                                suggestions,
                                term,
                                isSearchHeader = false,
-                               hideSearchButton = false
+                               hideSearchButton = false,
+                               className = ""
                            }: BaseSearchProps): JSX.Element => {
     const {onToggle, openClass} = useToggle(false, "c-filter-is-active", "");
 
@@ -45,7 +46,7 @@ export const BaseSearch = ({
 
     return (
         <div
-            className={`c-filter ${openClass} u-background-color--gray--light ${isSearchHeader ? "u-padding--double--bottom u-padding--double--top" : "u-padding u-spacing u-border--left l-field-container u-theme--border-color--darker"}`}>
+            className={`${className} c-filter ${openClass} u-background-color--gray--light ${isSearchHeader ? "u-padding--double--bottom u-padding--double--top" : "u-padding u-spacing u-border--left l-field-container u-theme--border-color--darker"}`}>
             <Form className="c-filter__search" role="search" onSubmit={onSubmit}>
                 <div
                     className={isSearchHeader ? isHeaderClasses : defaultClasses}>
