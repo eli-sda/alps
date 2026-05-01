@@ -5,7 +5,7 @@
  * @returns {Function}
  */
 function debounce(func: { apply: (arg0: any, arg1: IArguments) => void }, wait: number | undefined) {
-  let timeout: string | number | NodeJS.Timeout | null | undefined
+  let timeout: ReturnType<typeof setTimeout> | null | undefined
 
   return function() {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
