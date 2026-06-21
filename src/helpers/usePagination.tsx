@@ -76,22 +76,22 @@ export const usePagination = (
     // Add links and pages:
 
     // - First and Prev Links
-    if (page > first) {
+    if (page > first && showFirstAndLast) {
         // - Link First
-        if (showFirstAndLast) {
-            pages.push(setPage(first, {label: firstLabel}))
-        }
+        pages.push(setPage(first, {label: firstLabel}))
+    }
 
+    if (showPrevAndNext) {
         // - Link Prev
-        if (showPrevAndNext) {
-            pages.push(
-                setPage(page - 1, {
-                    label: showIconArrows ? prevIcon : prevLabel,
-                    isPrev: true,
-                    onClick: onPrevClick,
-                })
-            )
-        }
+        pages.push(
+            setPage(page - 1, {
+                label: prevLabel,
+                icon: showIconArrows ? prevIcon : undefined,
+                isPrev: true,
+                onClick: onPrevClick,
+                isHidden: page <= first,
+            })
+        )
     }
 
     // - First numbered pages
@@ -113,22 +113,21 @@ export const usePagination = (
     }
 
     // - Next and Last Links
-    if (page < total) {
-        // - Link Next
-        if (showPrevAndNext) {
-            pages.push(
-                setPage(page + 1, {
-                    label: showIconArrows ? nextIcon : nextLabel,
-                    isNext: true,
-                    onClick: onNextClick,
-                })
-            )
-        }
-
-        // - Last page
-        if (showFirstAndLast) {
-            pages.push(setPage(total, {label: lastLabel}))
-        }
+    // - Link Next
+    if (showPrevAndNext) {
+        pages.push(
+            setPage(page + 1, {
+                label: nextLabel,
+                icon: showIconArrows ? nextIcon : undefined,
+                isNext: true,
+                onClick: onNextClick,
+                isHidden: page >= total,
+            })
+        )
+    }
+    // - Last page
+    if (page < total && showFirstAndLast) {
+        pages.push(setPage(total, {label: lastLabel}))
     }
 
     return {pages: pages}
