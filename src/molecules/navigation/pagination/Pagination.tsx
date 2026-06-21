@@ -42,7 +42,7 @@ export interface PaginationProps {
      * Specify the nextLabel of your   Pagination
      */
     nextLabel: string,
-    onPageClick: () => void,
+    onPageClick: (number: number) => void,
     onNextClick: () => void,
     onPrevClick: () => void,
     prevIcon?: JSX.Element,
@@ -62,18 +62,13 @@ export interface PaginationProps {
      */
     showIconArrows?: boolean,
     /**
-     * Specify the surrounding of your   Pagination
+     * Specify the surrounding of your Pagination
      */
-    surrounding: number,
+    surrounding?: number,
     /**
-     * Specify the total of your   Pagination
+     * Specify the total of your Pagination
      */
     total: number,
-    /**
-     * Pass a function to handle page selection locally via state
-     * instead of relying on URL navigation.
-     */
-    onPageSelect?: (page: number) => void,
     className?: string,
 }
 
@@ -94,7 +89,6 @@ export const Pagination = ({
                                showPrevAndNext = true,
                                showIconArrows = true,
                                surrounding = 3,
-                               onPageSelect,
                                className
                            }: PaginationProps): JSX.Element => {
 
@@ -106,34 +100,10 @@ export const Pagination = ({
         onPageClick,
         onNextClick, onPrevClick, prevLabel, total, nextIcon, prevIcon, setUrl, showFirstAndLast, showPrevAndNext, showIconArrows, surrounding);
 
-    const handleCapture = (e: React.MouseEvent<HTMLElement>) => {
-        if (!onPageSelect) return;
-
-        const target = e.target as HTMLElement;
-        const anchor = target.closest('a');
-
-        if (anchor) {
-            const href = anchor.getAttribute('href');
-            if (href && href.includes('page=')) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                const match = href.match(/page=(\d+)/);
-                if (match && match[1]) {
-                    const pageNum = parseInt(match[1], 10);
-                    if (!isNaN(pageNum)) {
-                        onPageSelect(pageNum);
-                    }
-                }
-            }
-        }
-    };
-
     return (
         <nav
             className={`pagination u-text-align--center u-center-block${className ? ` ${className}` : ''}`}
             role="navigation"
-            onClickCapture={handleCapture}
         >
             {renderItems(pages, PaginationItem, "")}
         </nav>

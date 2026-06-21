@@ -28,7 +28,7 @@ export const usePagination = (
     firstLabel: string,
     lastLabel: string,
     nextLabel: string,
-    onPageClick: () => void,
+    onPageClick: (number: number) => void,
     onNextClick: () => void,
     onPrevClick: () => void,
     prevLabel: string,
@@ -68,8 +68,8 @@ export const usePagination = (
 
     // Generates pages for given range
     function setPagesForRange(range: number[]) {
-        return range.map(i => {
-            pages.push(setPage(i, {onClick: onPageClick}))
+        range.forEach(i => {
+            pages.push(setPage(i, {onClick: () => onPageClick(i)}))
         })
     }
 
