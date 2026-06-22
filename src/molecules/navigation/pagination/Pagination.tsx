@@ -42,7 +42,7 @@ export interface PaginationProps {
      * Specify the nextLabel of your   Pagination
      */
     nextLabel: string,
-    onPageClick: () => void,
+    onPageClick: (number: number) => void,
     onNextClick: () => void,
     onPrevClick: () => void,
     prevIcon?: JSX.Element,
@@ -62,13 +62,14 @@ export interface PaginationProps {
      */
     showIconArrows?: boolean,
     /**
-     * Specify the surrounding of your   Pagination
+     * Specify the surrounding of your Pagination
      */
-    surrounding: number,
+    surrounding?: number,
     /**
-     * Specify the total of your   Pagination
+     * Specify the total of your Pagination
      */
-    total: number
+    total: number,
+    className?: string,
 }
 
 export const Pagination = ({
@@ -87,7 +88,8 @@ export const Pagination = ({
                                showFirstAndLast = false,
                                showPrevAndNext = true,
                                showIconArrows = true,
-                               surrounding = 3
+                               surrounding = 3,
+                               className
                            }: PaginationProps): JSX.Element => {
 
     const {pages} = usePagination(page,
@@ -100,7 +102,7 @@ export const Pagination = ({
 
     return (
         <nav
-            className="pagination u-text-align--center u-center-block"
+            className={`pagination u-text-align--center u-center-block${className ? ` ${className}` : ''}`}
             role="navigation"
         >
             {renderItems(pages, PaginationItem, "")}

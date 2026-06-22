@@ -12,6 +12,8 @@ function onItemClick(cb: () => void) {
 export interface PaginationItemProps {
     number?: number,
     isCurrent?: boolean,
+    icon?: JSX.Element,
+    isHidden?: boolean,
     isDivider?: boolean,
     isNext?: boolean,
     isPrev?: boolean,
@@ -23,6 +25,8 @@ export interface PaginationItemProps {
 export const PaginationItem = ({
                                    number,
                                    isCurrent,
+                                   icon,
+                                   isHidden,
                                    isDivider,
                                    isPrev,
                                    isNext,
@@ -45,11 +49,13 @@ export const PaginationItem = ({
                 isArrow ? `pagination__${isPrev ? 'prev' : 'next'}` : ''
             }`}
             href={url}
+            title={isArrow ? label : undefined}
+            style={isHidden ? {visibility: 'hidden'} : undefined}
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             onClick={onItemClick(onClick)}
         >
-            {isArrow ? label : label || number}
+            {isArrow ? (icon || label) : label || number}
         </a>
     )
 }
