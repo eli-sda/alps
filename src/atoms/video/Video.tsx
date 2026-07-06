@@ -26,11 +26,16 @@ export const Video = ({
   const playerRef = useRef<any>(null);
   const wasPausedByUsRef = useRef<boolean>(false);
   const onEndedRef = useRef(onEnded);
+  const isVisibleRef = useRef(isVisible);
 
-  // Keep onEnded ref up to date
+  // Keep refs up to date
   useEffect(() => {
     onEndedRef.current = onEnded;
   }, [onEnded]);
+
+  useEffect(() => {
+    isVisibleRef.current = isVisible;
+  }, [isVisible]);
 
   // Determine if we should use YouTube API
   const useYouTubeAPI = onEnded !== undefined || isVisible !== undefined; // Check if src has autoplay=1 query param
@@ -47,10 +52,9 @@ export const Video = ({
     if (!useYouTubeAPI || !playerRef.current) return;
 
     if (isVisible === false) {
-      // Dialog closed - pause the video
-      const state = playerRef.current.getPlayerState?.();
-      if (state === 1) {
-        // PLAYING
+      // Dialog closed - pause regardless of current player state
+      // (could be buffering=3 or unstarted=-1, not just playing=1)
+      if (playerRef.current) {
         playerRef.current.pauseVideo();
         wasPausedByUsRef.current = true;
       }
@@ -84,10 +88,17 @@ export const Video = ({
         playerRef.current = new window.YT.Player(containerRef.current, {
           videoId,
           playerVars: {
-            autoplay: shouldAutoplay && isVisible !== false ? 1 : 0,
+            autoplay: shouldAutoplay && isVisibleRef.current !== false ? 1 : 0,
             rel: 0
           },
           events: {
+            onReady: () => {
+              // If dialog was closed before the player finished initializing, pause immediately
+              if (isVisibleRef.current === false) {
+                playerRef.current?.pauseVideo();
+                wasPausedByUsRef.current = true;
+              }
+            },
             onStateChange: (event: any) => {
               if (event.data === 0) {
                 // YT.PlayerState.ENDED
