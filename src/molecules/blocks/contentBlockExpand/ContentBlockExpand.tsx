@@ -15,15 +15,16 @@ export interface ContentBlockExpandProps {
      * Specify the description of your ContentBlockExpand
      */
     description?: string,
-    children?: React.ReactNode
+    children?: React.ReactNode,
+    className?: string
 }
 
-export const ContentBlockExpand = ({title, kicker, description, children}: ContentBlockExpandProps): JSX.Element => {
+export const ContentBlockExpand = ({title, kicker, description, children, className}: ContentBlockExpandProps): JSX.Element => {
     const {onToggle, openClass} = useToggle();
 
     return (
         <div
-            className={`c-block c-block c-block__expand u-background-color--gray--light u-border--left u-theme--border-color--darker--left can-be--dark-dark ${openClass}`}>
+            className={`c-block c-block c-block__expand u-background-color--gray--light u-border--left u-theme--border-color--darker--left can-be--dark-dark ${openClass}${className ? ` ${className}` : ''}`}>
             <div className="c-block__header">
                 <div className="c-block__title u-padding">
                     <h2 className="u-font--primary--s u-theme--color--darker">
