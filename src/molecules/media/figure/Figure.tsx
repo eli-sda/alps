@@ -17,7 +17,7 @@ export interface FigureProps {
   /**
    * Specify the caption of your  Figure
    */
-  caption?: string;
+  caption?: string | JSX.Element;
   /**
    * Specify the align of your  Figure
    */
