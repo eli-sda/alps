@@ -11,9 +11,9 @@ export interface FigcaptionProps {
 export const Figcaption = ({caption, children}: FigcaptionProps): JSX.Element => {
     return (
         <figcaption className="o-figcaption">
-            <p className="o-caption u-color--gray u-font--secondary--s">
+            <div className="o-caption u-color--gray u-font--secondary--s">
                 {caption || children}
-            </p>
+            </div>
         </figcaption>
     )
 }
