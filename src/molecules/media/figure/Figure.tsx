@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import {Video} from '../../../atoms/video/Video';
+import {Video, VideoPlayerApi} from '../../../atoms/video/Video';
 import {Figcaption} from '../figcaption/Figcaption';
 import {Picture} from '../../../atoms/images/Picture';
 import {
@@ -47,6 +47,10 @@ export interface FigureProps {
    * Control video visibility (pause when hidden)
    */
   isVisible?: boolean;
+  /**
+   * Callback with the underlying YouTube player API once it is ready
+   */
+  onPlayerReady?: (api: VideoPlayerApi) => void;
 }
 
 export const Figure = ({
@@ -59,6 +63,7 @@ export const Figure = ({
   size,
   onVideoEnded,
   isVisible,
+  onPlayerReady,
   onImageClick
 }: FigureProps): JSX.Element => {
   const classes = useMemo(
@@ -79,7 +84,12 @@ export const Figure = ({
       )}
       {videoSrc && (
         <div className="u-image--wrap">
-          <Video src={videoSrc} onEnded={onVideoEnded} isVisible={isVisible} />
+          <Video
+            src={videoSrc}
+            onEnded={onVideoEnded}
+            isVisible={isVisible}
+            onPlayerReady={onPlayerReady}
+          />
         </div>
       )}
       {caption && (
