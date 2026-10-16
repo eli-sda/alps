@@ -7,12 +7,24 @@ declare global {
   }
 }
 
+export interface VideoPlayerApi {
+  play: () => void;
+  pause: () => void;
+  seekTo: (seconds: number) => void;
+  getCurrentTime: () => number;
+  /**
+   * Set the position the next loaded video should start from.
+   */
+  setNextStartSeconds: (seconds: number) => void;
+}
+
 export interface VideoProps {
   src: string;
   width?: number;
   height?: number;
   onEnded?: () => void;
   isVisible?: boolean;
+  onPlayerReady?: (api: VideoPlayerApi) => void;
 }
 
 export const Video = ({
@@ -20,13 +32,16 @@ export const Video = ({
   width,
   height,
   onEnded,
-  isVisible
+  isVisible,
+  onPlayerReady
 }: VideoProps): JSX.Element => {
   const containerRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<any>(null);
   const wasPausedByUsRef = useRef<boolean>(false);
   const onEndedRef = useRef(onEnded);
   const isVisibleRef = useRef(isVisible);
+  const onPlayerReadyRef = useRef(onPlayerReady);
+  const startSecondsRef = useRef<number | undefined>(undefined);
 
   // Keep refs up to date
   useEffect(() => {
@@ -37,8 +52,13 @@ export const Video = ({
     isVisibleRef.current = isVisible;
   }, [isVisible]);
 
+  useEffect(() => {
+    onPlayerReadyRef.current = onPlayerReady;
+  }, [onPlayerReady]);
+
   // Determine if we should use YouTube API
-  const useYouTubeAPI = onEnded !== undefined || isVisible !== undefined; // Check if src has autoplay=1 query param
+  const useYouTubeAPI =
+    onEnded !== undefined || isVisible !== undefined || onPlayerReady !== undefined; // Check if src has autoplay=1 query param
   const shouldAutoplay = src.includes('autoplay=1');
 
   // Extract video ID from YouTube URL
@@ -98,6 +118,17 @@ export const Video = ({
                 playerRef.current?.pauseVideo();
                 wasPausedByUsRef.current = true;
               }
+              onPlayerReadyRef.current?.({
+                play: () => playerRef.current?.playVideo(),
+                pause: () => playerRef.current?.pauseVideo(),
+                seekTo: (seconds: number) =>
+                  playerRef.current?.seekTo(seconds, true),
+                getCurrentTime: () =>
+                  playerRef.current?.getCurrentTime?.() ?? 0,
+                setNextStartSeconds: (seconds: number) => {
+                  startSecondsRef.current = seconds;
+                }
+              });
             },
             onStateChange: (event: any) => {
               if (event.data === 0) {
@@ -132,7 +163,8 @@ export const Video = ({
     const videoId = getVideoId(src);
     if (!videoId) return;
 
-    playerRef.current.loadVideoById(videoId);
+    playerRef.current.loadVideoById(videoId, startSecondsRef.current);
+    startSecondsRef.current = undefined;
   }, [src]);
 
   // If onEnded or isVisible is provided, use the div container for YouTube API
