@@ -18,6 +18,14 @@ export interface VideoPlayerApi {
   setNextStartSeconds: (seconds: number) => void;
 }
 
+// The YT.Player object can exist before its methods are usable (for example
+// while the IFrame API is still initialising), so never call pause blindly.
+const pausePlayer = (player: any): boolean => {
+  if (typeof player?.pauseVideo !== 'function') return false;
+  player.pauseVideo();
+  return true;
+};
+
 export interface VideoProps {
   src: string;
   width?: number;
@@ -74,8 +82,7 @@ export const Video = ({
     if (isVisible === false) {
       // Dialog closed - pause regardless of current player state
       // (could be buffering=3 or unstarted=-1, not just playing=1)
-      if (playerRef.current) {
-        playerRef.current.pauseVideo();
+      if (pausePlayer(playerRef.current)) {
         wasPausedByUsRef.current = true;
       }
     } else if (isVisible === true) {
